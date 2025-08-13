@@ -59,7 +59,7 @@ async function loadData() {
 
         select.addEventListener('change', function() {
             const pdfFile = this.value;
-            document.getElementById('pdfViewer').src = pdfFile || '';
+            document.getElementById('pdfViewer').src = pdfFile ? pdfFile + '#view=FitH' : '';
         });
     } catch (err) {
         console.error('Lỗi load dữ liệu:', err);
