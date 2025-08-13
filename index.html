@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Thông tin 70 Ấp</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        max-width: 1000px;
+        margin: auto;
+    }
+    select {
+        padding: 8px;
+        font-size: 16px;
+        margin-bottom: 20px;
+        width: 100%;
+    }
+    iframe {
+        width: 100%;
+        height: 800px;
+        border: 1px solid #ccc;
+    }
+</style>
+</head>
+<body>
+<h2>Thông tin 70 Ấp</h2>
+
+<select id="apSelect">
+    <option value="">-- Chọn Ấp --</option>
+</select>
+
+<iframe id="pdfViewer" src=""></iframe>
+
+<script>
+async function loadData() {
+    try {
+        const res = await fetch('data.json');
+        const data = await res.json();
+        const select = document.getElementById('apSelect');
+
+        data.forEach(ap => {
+            const option = document.createElement('option');
+            option.value = 'pdfs/' + ap.file;
+            option.textContent = ap.name;
+            select.appendChild(option);
+        });
+
+        select.addEventListener('change', function() {
+            const pdfFile = this.value;
+            document.getElementById('pdfViewer').src = pdfFile || '';
+        });
+    } catch (err) {
+        console.error('Lỗi load dữ liệu:', err);
+    }
+}
+
+loadData();
+</script>
+
+</body>
+</html>
