@@ -59,7 +59,8 @@ async function loadData() {
 
         select.addEventListener('change', function() {
             const pdfFile = this.value;
-            document.getElementById('pdfViewer').src = pdfFile ? pdfFile + '#view=FitH' : '';
+            // Luôn mở PDF ở chế độ Fit to Width
+            document.getElementById('pdfViewer').src = pdfFile ? pdfFile + '#zoom=page-width' : '';
         });
     } catch (err) {
         console.error('Lỗi load dữ liệu:', err);
